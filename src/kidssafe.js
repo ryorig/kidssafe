@@ -93,15 +93,15 @@ const addLink = (parent, text, url) => {
   parent.appendChild(link);
 };
 
-export const showKidsSafe = (city, area, githubLink) => {
+export const showKidsSafe = (city, area, githubLink, options = {}) => {
   const leafletStyle = document.createElement("link");
   leafletStyle.rel = "stylesheet";
   leafletStyle.href = "https://code4sabae.github.io/leaflet-mjs/leaflet.css";
   document.head.appendChild(leafletStyle);
-  leafletStyle.onload = () => init(city, area, githubLink);
+  leafletStyle.onload = () => init(city, area, githubLink, options);
 };
 
-const init = async (city, area, githubLink) => {
+const init = async (city, area, githubLink, options) => {
   document.title = `${city} ${area} こども安全マップ`;
   document.body.replaceChildren();
 
@@ -236,7 +236,7 @@ const init = async (city, area, githubLink) => {
   }
 
   if (positions.length) map.fitBounds(positions, { padding: [56, 56], maxZoom: 16 });
-  else map.setView([33.987, 134.366], 13);
+  else map.setView(options.center || [33.967225, 134.350531], options.zoom || 13);
   status.textContent = `${config.length}種類の安全情報を表示しています`;
   window.setTimeout(() => status.classList.add("is-hidden"), 2400);
 
