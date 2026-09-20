@@ -1,6 +1,6 @@
-﻿name,fn,icon,emoji
-子ども注意ポイント,./data/locations/child-safety.csv,,⚠️
-こども110番の家,./data/locations/kamiyama-house110.csv,,🏠
-AED,./data/locations/kamiyama-aed.csv,,🫀
-見守り拠点,./data/locations/kamiyama-watch.csv,,🤝
-避難・防災拠点,./data/locations/kamiyama-shelter.csv,,🛟
+﻿name,fn,icon,marker
+子ども注意ポイント,./data/locations/child-safety.csv,,注意
+こども110番の家,./data/locations/kamiyama-house110.csv,,110
+AED,./data/locations/kamiyama-aed.csv,,AED
+見守り拠点,./data/locations/kamiyama-watch.csv,,見守り
+避難・防災拠点,./data/locations/kamiyama-shelter.csv,,避難

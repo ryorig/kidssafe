@@ -53,9 +53,9 @@ For more details on updating data, refer to the [kidssafe-template](https://gith
 
 This file defines the layers available on the map.
 
-| name | fn | icon | emoji |
+| name | fn | icon | marker |
 | :--- | :--- | :--- | :--- |
-| Layer Display Name | Data Filename | Icon Filename | Optional emoji marker |
+| Layer Display Name | Data Filename | Icon Filename | Optional text marker |
 
 **Example:**
 ```csv

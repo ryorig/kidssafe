@@ -7,7 +7,7 @@ import { fetchImage } from "https://js.sabae.cc/fetchImage.js";
 const ICON_SIZE = 42;
 const LAYER_CONFIG_URL = "./data/layers.csv";
 const ICON_BASE_URL = "./assets/icons/";
-const HIDDEN_FIELDS = new Set(["Geo3x3", "geo3x3", "lat", "lng", "icon", "emoji"]);
+const HIDDEN_FIELDS = new Set(["Geo3x3", "geo3x3", "lat", "lng", "icon", "marker"]);
 
 const makeElement = (tag, className, text) => {
   const element = document.createElement(tag);
@@ -64,13 +64,13 @@ const makePopup = (data) => {
   return card;
 };
 
-const makeEmojiIcon = (emoji, label) =>
+const makeTextIcon = (text, label) =>
   L.divIcon({
-    className: "map-emoji-marker",
-    html: `<span role="img" aria-label="${label}">${emoji}</span>`,
-    iconSize: [44, 44],
-    iconAnchor: [22, 42],
-    popupAnchor: [0, -38],
+    className: "map-text-marker",
+    html: `<span aria-label="${label}">${text}</span>`,
+    iconSize: [48, 32],
+    iconAnchor: [24, 32],
+    popupAnchor: [0, -28],
   });
 
 const makeImageIcon = async (filename) => {
@@ -150,7 +150,7 @@ const init = async (city, area, githubLink, options) => {
   guide.appendChild(makeElement("h2", "guide-title", "子ども注意ポイント"));
   guide.appendChild(makeElement("p", "guide-text", "車が多い道、見通しの悪い交差点、暗い道、水路や崖、人通りの少ない場所などを地域で共有します。"));
   const guideList = makeElement("ul", "guide-list");
-  ["🚗 車・自転車が多い", "👀 見通しが悪い", "🌙 暗い・人通りが少ない", "🌊 水路・川・崖が近い", "🏃 飛び出しに注意"].forEach(
+  ["車・自転車が多い", "見通しが悪い", "暗い・人通りが少ない", "水路・川・崖が近い", "飛び出しに注意"].forEach(
     (item) => guideList.appendChild(makeElement("li", "", item)),
   );
   guide.appendChild(guideList);
@@ -204,9 +204,9 @@ const init = async (city, area, githubLink, options) => {
       const position = getPosition(record);
       if (!position) continue;
       let icon;
-      const emoji = record.emoji || layerConfig.emoji;
-      if (emoji) {
-        icon = makeEmojiIcon(emoji, layerConfig.name);
+      const markerText = record.marker || layerConfig.marker;
+      if (markerText) {
+        icon = makeTextIcon(markerText, layerConfig.name);
       } else if (record.icon || layerConfig.icon) {
         try {
           icon = await makeImageIcon(record.icon || layerConfig.icon);
@@ -224,7 +224,7 @@ const init = async (city, area, githubLink, options) => {
     const filterButton = makeElement("button", "filter-chip is-active");
     filterButton.type = "button";
     filterButton.setAttribute("aria-pressed", "true");
-    filterButton.innerHTML = `<span aria-hidden="true">${layerConfig.emoji || "●"}</span><span>${layerConfig.name}</span><small>${markerCount}</small>`;
+    filterButton.innerHTML = `<span>${layerConfig.name}</span><small>${markerCount}</small>`;
     filterButton.addEventListener("click", () => {
       const isActive = filterButton.getAttribute("aria-pressed") === "true";
       filterButton.setAttribute("aria-pressed", String(!isActive));
