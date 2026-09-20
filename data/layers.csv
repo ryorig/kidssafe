@@ -1,0 +1,6 @@
+﻿name,fn,icon,emoji
+子ども注意ポイント,./data/locations/child-safety.csv,,⚠️
+110番の家,./data/locations/house110.csv,house110_icon.png
+AED,./data/locations/aed.csv,aed.png
+見守り隊,./data/locations/mimamori.csv,midori_obasan.png
+交通事故発生箇所,./data/locations/accident.csv,aioi_8.png
